@@ -220,7 +220,7 @@ class StadtnaviBaseLocalizationEn extends StadtnaviBaseLocalization {
 
   @override
   String selectStop(Object sizeStops) {
-    return 'Select Stop ($sizeStops)';
+    return 'Select option ($sizeStops)';
   }
 
   @override
@@ -511,4 +511,7 @@ class StadtnaviBaseLocalizationEn extends StadtnaviBaseLocalization {
 
   @override
   String get instructionVehicleMetro => 'Metro';
+
+  @override
+  String get chooseOnMap => 'Choose on map';
 }

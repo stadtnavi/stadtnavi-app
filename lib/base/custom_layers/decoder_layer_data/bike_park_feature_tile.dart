@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:stadtnavi_core/base/custom_layers/pbf_layer/bike_parks/bike_park_feature_model.dart';
 import 'package:stadtnavi_core/base/custom_layers/pbf_layer/bike_parks/bike_park_icons.dart';
+import 'package:stadtnavi_core/base/translations/stadtnavi_base_localizations.dart';
 
 class BikeParkFeatureTile extends StatelessWidget {
   final BikeParkFeature element;
@@ -13,6 +14,7 @@ class BikeParkFeatureTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizationST = StadtnaviBaseLocalization.of(context);
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
       child: Row(
@@ -29,7 +31,7 @@ class BikeParkFeatureTile extends StatelessWidget {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Text(
-                element.name ?? "",
+                localizationST.bicycleParking,
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,

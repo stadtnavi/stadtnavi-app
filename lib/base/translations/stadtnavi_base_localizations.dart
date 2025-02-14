@@ -62,8 +62,7 @@ import 'stadtnavi_base_localizations_en.dart';
 /// be consistent with the languages listed in the StadtnaviBaseLocalization.supportedLocales
 /// property.
 abstract class StadtnaviBaseLocalization {
-  StadtnaviBaseLocalization(String locale)
-      : localeName = intl.Intl.canonicalizedLocale(locale.toString());
+  StadtnaviBaseLocalization(String locale) : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
@@ -72,8 +71,7 @@ abstract class StadtnaviBaseLocalization {
         context, StadtnaviBaseLocalization)!;
   }
 
-  static const LocalizationsDelegate<StadtnaviBaseLocalization> delegate =
-      _StadtnaviBaseLocalizationDelegate();
+  static const LocalizationsDelegate<StadtnaviBaseLocalization> delegate = _StadtnaviBaseLocalizationDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -85,8 +83,7 @@ abstract class StadtnaviBaseLocalization {
   /// Additional delegates can be added by appending to this list in
   /// MaterialApp. This list does not have to be used at all if a custom list
   /// of delegates is preferred or required.
-  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates =
-      <LocalizationsDelegate<dynamic>>[
+  static const List<LocalizationsDelegate<dynamic>> localizationsDelegates = <LocalizationsDelegate<dynamic>>[
     delegate,
     GlobalMaterialLocalizations.delegate,
     GlobalCupertinoLocalizations.delegate,
@@ -522,7 +519,7 @@ abstract class StadtnaviBaseLocalization {
   /// No description provided for @selectStop.
   ///
   /// In en, this message translates to:
-  /// **'Select Stop ({sizeStops})'**
+  /// **'Select option ({sizeStops})'**
   String selectStop(Object sizeStops);
 
   /// No description provided for @bicycleParking.
@@ -661,8 +658,7 @@ abstract class StadtnaviBaseLocalization {
   ///
   /// In en, this message translates to:
   /// **'Enter the roundabout and take the {exitNumber} exit onto {streetName}'**
-  String relativeDirectionCircleCounterclockwise(
-      Object exitNumber, Object streetName);
+  String relativeDirectionCircleCounterclockwise(Object exitNumber, Object streetName);
 
   /// No description provided for @relativeDirectionElevator.
   ///
@@ -987,38 +983,42 @@ abstract class StadtnaviBaseLocalization {
   /// In en, this message translates to:
   /// **'Metro'**
   String get instructionVehicleMetro;
+
+  /// No description provided for @chooseOnMap.
+  ///
+  /// In en, this message translates to:
+  /// **'Choose on map'**
+  String get chooseOnMap;
 }
 
-class _StadtnaviBaseLocalizationDelegate
-    extends LocalizationsDelegate<StadtnaviBaseLocalization> {
+class _StadtnaviBaseLocalizationDelegate extends LocalizationsDelegate<StadtnaviBaseLocalization> {
   const _StadtnaviBaseLocalizationDelegate();
 
   @override
   Future<StadtnaviBaseLocalization> load(Locale locale) {
-    return SynchronousFuture<StadtnaviBaseLocalization>(
-        lookupStadtnaviBaseLocalization(locale));
+    return SynchronousFuture<StadtnaviBaseLocalization>(lookupStadtnaviBaseLocalization(locale));
   }
 
   @override
-  bool isSupported(Locale locale) =>
-      <String>['de', 'en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['de', 'en'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_StadtnaviBaseLocalizationDelegate old) => false;
 }
 
 StadtnaviBaseLocalization lookupStadtnaviBaseLocalization(Locale locale) {
+
+
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
-    case 'de':
-      return StadtnaviBaseLocalizationDe();
-    case 'en':
-      return StadtnaviBaseLocalizationEn();
+    case 'de': return StadtnaviBaseLocalizationDe();
+    case 'en': return StadtnaviBaseLocalizationEn();
   }
 
   throw FlutterError(
-      'StadtnaviBaseLocalization.delegate failed to load unsupported locale "$locale". This is likely '
-      'an issue with the localizations generation tool. Please file an issue '
-      'on GitHub with a reproducible sample app and the gen-l10n configuration '
-      'that was used.');
+    'StadtnaviBaseLocalization.delegate failed to load unsupported locale "$locale". This is likely '
+    'an issue with the localizations generation tool. Please file an issue '
+    'on GitHub with a reproducible sample app and the gen-l10n configuration '
+    'that was used.'
+  );
 }

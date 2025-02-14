@@ -254,7 +254,7 @@
   "commonTotalDistance": "Total distance",
   "commonSettings": "Settings",
   "mapLegend": "map legend",
-  "selectStop": "Select Stop ({sizeStops})",
+  "selectStop": "Select option ({sizeStops})",
   "bicycleParking": "Bicycle parking",
   "instructionVehicleRackRailway": "funicular/ rack railway",
   "commonTrack": "Track",
@@ -341,5 +341,6 @@
   "bicycleWalkFromTransitNoDuration": "Walk your bike off the {transportMode}",
   "bicycleWalkToTransitNoDuration": "Walk your bike to the {transportMode}",
   "instructionVehicleLightRail": "Rail",
-  "instructionVehicleMetro": "Metro"
+  "instructionVehicleMetro": "Metro",
+  "chooseOnMap" : "Choose on map"
 }

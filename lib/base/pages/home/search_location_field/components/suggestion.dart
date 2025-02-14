@@ -1,6 +1,7 @@
 import 'package:back_button_interceptor/back_button_interceptor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stadtnavi_core/base/translations/stadtnavi_base_localizations.dart';
 import 'package:stadtnavi_core/base/widgets/choose_location.dart';
 import 'package:stadtnavi_core/configuration/icons.dart';
 
@@ -200,7 +201,7 @@ class _BuildChooseOnMap extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizationSP = SavedPlacesLocalization.of(context);
+    final localizationST = StadtnaviBaseLocalization.of(context);
     return SliverToBoxAdapter(
       child: BuildItem(
         onTap: () async {
@@ -216,7 +217,7 @@ class _BuildChooseOnMap extends StatelessWidget {
           }
         },
         iconData: const Icon(Icons.place),
-        title: localizationSP.chooseOnMap,
+        title: localizationST.chooseOnMap,
       ),
     );
   }
