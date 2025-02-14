@@ -65,7 +65,7 @@ void main() async {
     TransportMode.walk: const Color(0xffFECC01),
   });
   await MatomoTracker.instance.initialize(
-    siteId: '1',
+    siteId: '2',
     url: 'https://track.dev.stadtnavi.eu/matomo.php',
   );
   await HBLayerData.loadHbLayers();
