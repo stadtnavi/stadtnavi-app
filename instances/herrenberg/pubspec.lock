@@ -1109,11 +1109,11 @@ packages:
     dependency: transitive
     description:
       path: "."
-      ref: "3.26.0-stadtnavi-lts"
-      resolved-ref: de16a5ea79a371dcc923a5574a0551d9def95363
+      ref: "3.26.1-stadtnavi-lts"
+      resolved-ref: "3c1bd6d0c08cca7bd4e47694663cf18f8750c4ea"
       url: "https://github.com/trufi-association/trufi-core.git"
     source: git
-    version: "3.25.0"
+    version: "3.26.1"
   typed_data:
     dependency: transitive
     description:

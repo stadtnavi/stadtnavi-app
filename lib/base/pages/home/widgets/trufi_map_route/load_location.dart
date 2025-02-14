@@ -105,7 +105,12 @@ class _LoadLocationState extends State<LoadLocation> {
 
   Future<LocationDetail> _fetchData() async {
     final searchLocationsCubit = context.read<SearchLocationsCubit>();
-    return searchLocationsCubit.reverseGeodecoding(widget.location).catchError(
+    return searchLocationsCubit
+        .reverseGeodecoding(
+      widget.location,
+      lang: Localizations.localeOf(context).languageCode,
+    )
+        .catchError(
       (error) {
         return LocationDetail("unknown place", "", widget.location);
       },

@@ -12,7 +12,7 @@ import 'location_model.dart';
 
 class OnlineSearchLocation implements SearchLocationRepository {
   static const String searchEndpoint =
-      'https://photon.stadtnavi.eu/pelias/v1/search';
+      'https://photon-eu.stadtnavi.eu/pelias/v1/search';
 
   final Map<String, dynamic>? queryParameters;
 
@@ -73,10 +73,13 @@ class OnlineSearchLocation implements SearchLocationRepository {
   }
 
   @override
-  Future<LocationDetail> reverseGeodecoding(LatLng location) async {
+  Future<LocationDetail> reverseGeodecoding(
+    LatLng location, {
+    String? lang = "en",
+  }) async {
     final response = await http.get(
       Uri.parse(
-        "https://photon.stadtnavi.eu/pelias/v1/reverse?point.lat=${location.latitude}&point.lon=${location.longitude}&boundary.circle.radius=0.1&lang=en&size=1&layers=address&zones=1",
+        "https://photon.stadtnavi.eu/pelias/v1/reverse?point.lat=${location.latitude}&point.lon=${location.longitude}&boundary.circle.radius=0.1&lang=$lang&size=1&layers=address&zones=1",
       ),
       headers: {},
     );

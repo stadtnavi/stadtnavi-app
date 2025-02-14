@@ -283,7 +283,12 @@ class ChooseLocationPageState extends State<ChooseLocationPage>
 
   Future<LocationDetail> _fetchData(LatLng location) async {
     final searchLocationsCubit = context.read<SearchLocationsCubit>();
-    return searchLocationsCubit.reverseGeodecoding(location).catchError(
+    return searchLocationsCubit
+        .reverseGeodecoding(
+      location,
+      lang: Localizations.localeOf(context).languageCode,
+    )
+        .catchError(
       (error) {
         return LocationDetail("", "", location);
       },
