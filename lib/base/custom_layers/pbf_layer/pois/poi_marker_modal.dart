@@ -34,7 +34,13 @@ class PoiMarkerModal extends StatelessWidget {
     if (element.openingHours != null) {
       openingHours = SimpleOpeningHours(element.openingHours!);
     }
-
+    const greyColor = Color(0xFF747474);
+    const divider = Divider(
+      color: greyColor,
+      thickness: 0.5,
+      indent: 10,
+      endIndent: 10,
+    );
     return ListView(
       children: [
         Container(
@@ -87,7 +93,7 @@ class PoiMarkerModal extends StatelessWidget {
         if (element.address != null ||
             element.phone != null ||
             element.website != null)
-          const Divider(),
+          divider,
         if (element.address != null)
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 4),
@@ -98,13 +104,15 @@ class PoiMarkerModal extends StatelessWidget {
                 ),
                 const Icon(
                   Icons.location_on,
-                  color: Colors.grey,
+                  color: greyColor,
+                  size: 16,
                 ),
                 const SizedBox(
                   width: 5,
                 ),
                 Text(
                   element.address!,
+                  style: const TextStyle(color: greyColor),
                 ),
               ],
             ),
@@ -118,9 +126,9 @@ class PoiMarkerModal extends StatelessWidget {
                   width: 7,
                 ),
                 SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: iconPhoneSvg,
+                  width: 16,
+                  height: 16,
+                  child: iconPhoneSvg(color: greyColor),
                 ),
                 const SizedBox(
                   width: 5,
@@ -144,9 +152,6 @@ class PoiMarkerModal extends StatelessWidget {
                       },
                   ),
                 ),
-                Text(
-                  element.phone!,
-                ),
               ],
             ),
           ),
@@ -159,9 +164,9 @@ class PoiMarkerModal extends StatelessWidget {
                   width: 7,
                 ),
                 SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: iconWebsiteSvg,
+                  width: 16,
+                  height: 16,
+                  child: iconWebsiteSvg(color: greyColor),
                 ),
                 const SizedBox(
                   width: 5,
@@ -188,7 +193,7 @@ class PoiMarkerModal extends StatelessWidget {
             ),
           ),
         if (openingHours != null) ...[
-          const Divider(),
+          divider,
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: OpeningTimeTable(

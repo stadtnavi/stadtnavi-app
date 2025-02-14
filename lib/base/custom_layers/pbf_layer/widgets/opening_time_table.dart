@@ -28,6 +28,7 @@ class _OpeningTimeTableState extends State<OpeningTimeTable> {
     final theme = Theme.of(context);
     final isAlwaysOpen = widget.openingHours.inp == '24/7';
     final weekday = DateTime.now().weekday;
+    const iconColor = Color(0xFF747474);
     return Column(
       children: [
         ExpansionTile(
@@ -41,15 +42,15 @@ class _OpeningTimeTableState extends State<OpeningTimeTable> {
             children: [
               const Icon(
                 Icons.access_time,
-                size: 20,
-                color: Colors.grey,
+                size: 16,
+                color: iconColor,
               ),
               const SizedBox(
                 width: 8,
               ),
               Text(
                 "${localizationST.commonNow} ",
-                style: theme.textTheme.bodyMedium,
+                style: theme.textTheme.bodyMedium?.copyWith(color: iconColor),
               ),
               widget.isOpenParking
                   ? Text(

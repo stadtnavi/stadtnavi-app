@@ -141,11 +141,11 @@ String showOnMap({String color = '000000'}) => '''
     </svg>
 ''';
 
-const String iconPhone = '''
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02z"/></svg>
+String iconPhone({String color = '000000'}) => '''
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="$color" d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24c1.12.37 2.33.57 3.57.57c.55 0 1 .45 1 1V20c0 .55-.45 1-1 1c-9.39 0-17-7.61-17-17c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1c0 1.25.2 2.45.57 3.57c.11.35.03.74-.25 1.02z"/></svg>
 ''';
-const String iconWebsite = '''
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0-18 0m.6-3h16.8M3.6 15h16.8"/><path d="M11.5 3a17 17 0 0 0 0 18m1-18a17 17 0 0 1 0 18"/></g></svg>''';
+String iconWebsite({String color = '000000'}) => '''
+<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="$color" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0-18 0m.6-3h16.8M3.6 15h16.8"/><path d="M11.5 3a17 17 0 0 0 0 18m1-18a17 17 0 0 1 0 18"/></g></svg>''';
 
 SvgPicture waitSvg = SvgPicture.string(wait);
 SvgPicture walkSvg = SvgPicture.string(walk);
@@ -166,5 +166,14 @@ Widget showOnMapSvg({Color? color}) {
   ));
 }
 
-SvgPicture iconPhoneSvg = SvgPicture.string(iconPhone);
-SvgPicture iconWebsiteSvg = SvgPicture.string(iconWebsite);
+Widget iconPhoneSvg({Color? color}) {
+  return SvgPicture.string(iconPhone(
+    color: decodeFillColor(color),
+  ));
+}
+
+Widget iconWebsiteSvg({Color? color}) {
+  return SvgPicture.string(iconWebsite(
+    color: decodeFillColor(color),
+  ));
+}
