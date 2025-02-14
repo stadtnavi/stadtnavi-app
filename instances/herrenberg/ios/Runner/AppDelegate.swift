@@ -10,4 +10,11 @@ import UIKit
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+  
+  override func applicationDidBecomeActive(_ application: UIApplication) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+          application.applicationIconBadgeNumber = -1
+          application.applicationIconBadgeNumber = 0
+      }
+  }
 }
