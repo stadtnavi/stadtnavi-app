@@ -13,6 +13,7 @@ class ItineraryCard extends StatelessWidget {
   final PlanItinerary itinerary;
   final PlanItinerary selectedItinerary;
   final GestureTapCallback onTap;
+  final ModesTransportType? typeTransport;
   final Function(
     PlanItinerary selectItinerary, {
     bool? showAllItineraries,
@@ -24,6 +25,7 @@ class ItineraryCard extends StatelessWidget {
     required this.selectedItinerary,
     required this.onTap,
     required this.selectItinerary,
+    this.typeTransport,
   }) : super(key: key);
 
   @override
@@ -71,7 +73,9 @@ class ItineraryCard extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              if (itinerary.isMinorEmissionsPerPerson) ...[
+                              if (itinerary.isMinorEmissionsPerPerson &&
+                                  typeTransport !=
+                                      ModesTransportType.carAndCarPark) ...[
                                 SvgPicture.string(leafIcon),
                                 Container(
                                   width: 5,

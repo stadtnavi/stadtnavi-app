@@ -116,6 +116,7 @@ class _BottomSheetItinerariesState extends State<BottomSheetItineraries>
                         ),
                       ItineraryCard(
                         itinerary: itinerary,
+                        typeTransport: widget.typeTransport,
                         onTap: () {
                           setState(() {
                             showDetail = true;
