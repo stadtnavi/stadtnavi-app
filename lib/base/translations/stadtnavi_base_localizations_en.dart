@@ -475,6 +475,16 @@ class StadtnaviBaseLocalizationEn extends StadtnaviBaseLocalization {
   }
 
   @override
+  String get itineraryDetailsRouteHasInfoAlert => 'Route has alerts.';
+
+  @override
+  String get itineraryDetailsRouteHasSevereAlert => 'Route has disruptions.';
+
+  @override
+  String get itineraryDetailsRouteHasUnknownAlert => 'Route has disruptions.';
+
+  @override
+  String get itineraryDetailsRouteHasWarningAlert => 'Route has disruptions.';
   String get poiTagWheelchair => 'Wheelchair accessible';
 
   @override

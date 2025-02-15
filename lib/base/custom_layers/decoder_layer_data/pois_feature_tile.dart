@@ -14,6 +14,7 @@ class PoisFeatureTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isLanguageEn = Localizations.localeOf(context).languageCode == 'en';
     final subCategoryData = HBLayerData.subCategoriesList[element.category3];
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 10),
@@ -38,7 +39,10 @@ class PoisFeatureTile extends StatelessWidget {
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Text(
-                element.name ?? '',
+                element.name ??
+                    (isLanguageEn
+                        ? (subCategoryData?.en ?? "")
+                        : (subCategoryData?.de ?? "")),
                 style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.bold,

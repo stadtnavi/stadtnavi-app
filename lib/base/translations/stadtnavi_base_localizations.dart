@@ -928,6 +928,29 @@ abstract class StadtnaviBaseLocalization {
   /// **'{minutes} min'**
   String departureTimeInMinutes(Object minutes);
 
+  /// No description provided for @itineraryDetailsRouteHasInfoAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Route has alerts.'**
+  String get itineraryDetailsRouteHasInfoAlert;
+
+  /// No description provided for @itineraryDetailsRouteHasSevereAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Route has disruptions.'**
+  String get itineraryDetailsRouteHasSevereAlert;
+
+  /// No description provided for @itineraryDetailsRouteHasUnknownAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Route has disruptions.'**
+  String get itineraryDetailsRouteHasUnknownAlert;
+
+  /// No description provided for @itineraryDetailsRouteHasWarningAlert.
+  ///
+  /// In en, this message translates to:
+  /// **'Route has disruptions.'**
+  String get itineraryDetailsRouteHasWarningAlert;
   /// No description provided for @poiTagWheelchair.
   ///
   /// In en, this message translates to:

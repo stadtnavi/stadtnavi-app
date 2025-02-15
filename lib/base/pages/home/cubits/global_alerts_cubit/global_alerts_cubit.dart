@@ -58,7 +58,7 @@ class GlobalAlertsCubit extends Cubit<GlobalAlertsState> {
     tempAlerts.remove(alert);
     final newState = state.copyWith(
       alerts: tempAlerts,
-      removedAlertIds: [...state.removedAlertIds, alert.id],
+      removedAlertIds: [...state.removedAlertIds, alert.getServiceAlertId],
     );
     await updateGlobalAlertsState(newState);
   }

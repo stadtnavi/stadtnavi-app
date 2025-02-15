@@ -29,6 +29,10 @@ class Alert {
   final AlertSeverityLevelType? alertSeverityLevel;
   final double? effectiveStartDate;
   final double? effectiveEndDate;
+  final List<String>? entities;
+
+  // Custom field
+  final String? sourceAlert;
 
   const Alert({
     this.id,
@@ -51,6 +55,8 @@ class Alert {
     this.alertSeverityLevel,
     this.effectiveStartDate,
     this.effectiveEndDate,
+    this.entities,
+    this.sourceAlert,
   });
 
   factory Alert.fromJson(Map<String, dynamic> json) => Alert(
@@ -75,14 +81,14 @@ class Alert {
                 (x) => PatternOtp.fromJson(x as Map<String, dynamic>),
               ))
             : null,
-        alertHeaderText: json['alertHeaderText'].toString(),
+        alertHeaderText: json['alertHeaderText'],
         alertHeaderTextTranslations: json['alertHeaderTextTranslations'] != null
             ? List<TranslatedString>.from(
                 (json["alertHeaderTextTranslations"] as List<dynamic>).map(
                 (x) => TranslatedString.fromJson(x as Map<String, dynamic>),
               ))
             : null,
-        alertDescriptionText: json['alertDescriptionText'].toString(),
+        alertDescriptionText: json['alertDescriptionText'],
         alertDescriptionTextTranslations:
             json['alertDescriptionTextTranslations'] != null
                 ? List<TranslatedString>.from(
@@ -105,6 +111,12 @@ class Alert {
         effectiveStartDate:
             double.tryParse(json['effectiveStartDate'].toString()),
         effectiveEndDate: double.tryParse(json['effectiveEndDate'].toString()),
+        entities: json['entities'] != null
+            ? List<String>.from((json["entities"] as List<dynamic>).map(
+                (x) => x["__typename"],
+              ))
+            : null,
+        sourceAlert: json['sourceAlert'],
       );
 
   Map<String, dynamic> toJson() => {
@@ -139,5 +151,59 @@ class Alert {
         'alertSeverityLevel': alertSeverityLevel?.name,
         'effectiveStartDate': effectiveStartDate,
         'effectiveEndDate': effectiveEndDate,
+        'entities': entities?.map((e) => {"__typename": e}).toList(),
+        'sourceAlert': sourceAlert,
       };
+
+  Alert copyWith({
+    String? id,
+    String? alertId,
+    int? alertHash,
+    String? feed,
+    Agency? agency,
+    RouteOtp? route,
+    Trip? trip,
+    Stop? stop,
+    List<PatternOtp>? patterns,
+    String? alertHeaderText,
+    List<TranslatedString>? alertHeaderTextTranslations,
+    String? alertDescriptionText,
+    List<TranslatedString>? alertDescriptionTextTranslations,
+    String? alertUrl,
+    List<TranslatedString>? alertUrlTranslations,
+    AlertEffectType? alertEffect,
+    AlertCauseType? alertCause,
+    AlertSeverityLevelType? alertSeverityLevel,
+    double? effectiveStartDate,
+    double? effectiveEndDate,
+    List<String>? entities,
+    String? sourceAlert,
+  }) {
+    return Alert(
+      id: id ?? this.id,
+      alertId: alertId ?? this.alertId,
+      alertHash: alertHash ?? this.alertHash,
+      feed: feed ?? this.feed,
+      agency: agency ?? this.agency,
+      route: route ?? this.route,
+      trip: trip ?? this.trip,
+      stop: stop ?? this.stop,
+      patterns: patterns ?? this.patterns,
+      alertHeaderText: alertHeaderText ?? this.alertHeaderText,
+      alertHeaderTextTranslations:
+          alertHeaderTextTranslations ?? this.alertHeaderTextTranslations,
+      alertDescriptionText: alertDescriptionText ?? this.alertDescriptionText,
+      alertDescriptionTextTranslations: alertDescriptionTextTranslations ??
+          this.alertDescriptionTextTranslations,
+      alertUrl: alertUrl ?? this.alertUrl,
+      alertUrlTranslations: alertUrlTranslations ?? this.alertUrlTranslations,
+      alertEffect: alertEffect ?? this.alertEffect,
+      alertCause: alertCause ?? this.alertCause,
+      alertSeverityLevel: alertSeverityLevel ?? this.alertSeverityLevel,
+      effectiveStartDate: effectiveStartDate ?? this.effectiveStartDate,
+      effectiveEndDate: effectiveEndDate ?? this.effectiveEndDate,
+      entities: entities ?? this.entities,
+      sourceAlert: sourceAlert ?? this.sourceAlert,
+    );
+  }
 }

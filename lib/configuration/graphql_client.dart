@@ -1,6 +1,9 @@
 import 'package:graphql/client.dart';
 
-GraphQLClient getClient(String endpoint) {
+GraphQLClient getClient(
+  String endpoint, {
+  PartialDataCachePolicy partialDataPolicy = PartialDataCachePolicy.accept,
+}) {
   final HttpLink _httpLink = HttpLink(
     endpoint,
     defaultHeaders: {
@@ -10,7 +13,7 @@ GraphQLClient getClient(String endpoint) {
   return GraphQLClient(
     cache: GraphQLCache(
       store: HiveStore(),
-      partialDataPolicy: PartialDataCachePolicy.accept,
+      partialDataPolicy: partialDataPolicy,
     ),
     link: _httpLink,
   );

@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
 import 'package:stadtnavi_core/base/custom_layers/services/models_otp/enums/alert_cause_type.dart';
 import 'package:stadtnavi_core/base/custom_layers/services/models_otp/enums/alert_effect_type.dart';
 import 'package:stadtnavi_core/base/custom_layers/services/models_otp/enums/alert_severity_level_type.dart';
@@ -59,18 +61,28 @@ class GlobalAlertEntity extends Equatable {
 
   Map<String, dynamic> toJson() {
     return {
-      'alertCause': alertCause,
+      'alertCause': alertCause?.name,
       'alertDescriptionText': alertDescriptionText,
-      'alertEffect': alertEffect,
+      'alertEffect': alertEffect?.name,
       'alertHash': alertHash,
       'alertHeaderText': alertHeaderText,
-      'alertSeverityLevel': alertSeverityLevel,
+      'alertSeverityLevel': alertSeverityLevel?.name,
       'alertUrl': alertUrl,
-      'effectiveEndDate': effectiveEndDate,
-      'effectiveStartDate': effectiveStartDate,
+      'effectiveEndDate': effectiveEndDate != null
+          ? effectiveEndDate!.millisecondsSinceEpoch ~/ 1000
+          : null,
+      'effectiveStartDate': effectiveStartDate != null
+          ? effectiveStartDate!.millisecondsSinceEpoch ~/ 1000
+          : null,
       'feed': feed,
       'id': id,
     };
+  }
+
+  String get getServiceAlertId {
+    final combinedString =
+        '$alertDescriptionText$alertHeaderText$alertSeverityLevel$effectiveEndDate$effectiveStartDate$feed';
+    return sha256.convert(utf8.encode(combinedString)).toString();
   }
 
   @override

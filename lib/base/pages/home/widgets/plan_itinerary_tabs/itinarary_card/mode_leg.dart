@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stadtnavi_core/base/models/enums/enums_plan/enums_plan.dart';
 import 'package:stadtnavi_core/base/models/enums/enums_plan/icons/other_icons.dart';
 import 'package:stadtnavi_core/base/models/plan_entity.dart';
+import 'package:stadtnavi_core/base/models/utils/alert_utils.dart';
 import 'package:stadtnavi_core/base/pages/home/widgets/plan_itinerary_tabs/itinarary_card/icon_transport.dart';
 import 'package:trufi_core/base/models/enums/transport_mode.dart';
 import 'package:trufi_core/base/utils/util_icons/custom_icons.dart';
@@ -156,18 +157,17 @@ class RouteLeg extends StatelessWidget {
     return SizedBox(
       width: (maxWidth * perc) >= 24 ? (maxWidth * perc) : 24,
       height: 30,
-      child: ClipRRect(
-        child: IconTransport(
-          bacgroundColor: leg.primaryColor,
-          color: Colors.white,
-          icon: leg.transportMode.getImage(color: Colors.white),
-          secondaryIcon: (maxWidth * perc) >= 46 && isRedenderBike
-              ? bikeSvg(color: 'FFFFFF')
-              : null,
-          text: (maxWidth * perc - 24) >= ((leg.nameTransport.length) * 8.5)
-              ? leg.nameTransport
-              : '',
-        ),
+      child: IconTransport(
+        bacgroundColor: leg.primaryColor,
+        color: Colors.white,
+        icon: leg.transportMode.getImage(color: Colors.white),
+        secondaryIcon: (maxWidth * perc) >= 46 && isRedenderBike
+            ? bikeSvg(color: 'FFFFFF')
+            : null,
+        text: (maxWidth * perc - 24) >= ((leg.nameTransport.length) * 8.5)
+            ? leg.nameTransport
+            : '',
+        alertSeverityLevel: AlertUtils.getActiveLegAlertSeverityLevel(leg),
       ),
     );
   }

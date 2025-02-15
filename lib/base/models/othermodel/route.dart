@@ -120,17 +120,17 @@ class RouteOtp {
 
   RouteEntity toRouteEntity() {
     return RouteEntity(
-      id: id,
-      gtfsId: gtfsId,
-      agency: agency?.toAgencyEntity(),
-      shortName: shortName,
-      longName: longName,
-      mode: getTransportMode(mode: mode?.name ?? ''),
-      type: type,
-      desc: desc,
-      url: url,
-      color: color,
-      textColor: textColor,
-    );
+        id: id,
+        gtfsId: gtfsId,
+        agency: agency?.toAgencyEntity(),
+        shortName: shortName,
+        longName: longName,
+        mode: getTransportMode(mode: mode?.name ?? ''),
+        type: type,
+        desc: desc,
+        url: url,
+        color: color,
+        textColor: textColor,
+        alerts: alerts);
   }
 }

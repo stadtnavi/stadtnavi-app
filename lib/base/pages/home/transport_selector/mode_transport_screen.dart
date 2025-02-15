@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:stadtnavi_core/base/custom_layers/cubits/panel/panel_cubit.dart';
 import 'package:stadtnavi_core/base/models/plan_entity.dart';
 import 'package:stadtnavi_core/base/pages/home/cubits/map_route_cubit/map_route_cubit.dart';
 import 'package:stadtnavi_core/base/pages/home/transport_selector/bottom_sheet_itineraries.dart';
@@ -32,15 +33,25 @@ class _ModeTransportScreen extends State<ModeTransportScreen>
     WidgetsBinding.instance.addPostFrameCallback((duration) {
       final mapRouteState = context.read<MapRouteCubit>().state;
       final mapModesCubit = context.read<MapModesCubit>();
+      context.read<PanelCubit>().changeTransportPanel(true);
+      context.read<PanelCubit>().cleanPanel();
       final mapModesState = mapModesCubit.state;
       repaintMap(mapRouteState, mapModesCubit, mapModesState);
     });
   }
 
   @override
+  void deactivate() {
+    context.read<PanelCubit>().cleanPanel();
+    context.read<PanelCubit>().changeTransportPanel(false);
+    super.deactivate();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final mapRouteState = context.read<MapRouteCubit>().state;
     final mapModesCubit = context.watch<MapModesCubit>();
+    final panelCubit = context.watch<PanelCubit>();
     return BaseTrufiPage(
       child: Scaffold(
         appBar: AppBar(title: Text(widget.title)),
@@ -57,12 +68,25 @@ class _ModeTransportScreen extends State<ModeTransportScreen>
                 body: TrufiMapMode(
                   trufiMapController: trufiMapController,
                 ),
-                panel: mapModesCubit.state.plan != null
-                    ? BottomSheetItineraries(
-                        trufiMapController: trufiMapController,
-                        typeTransport: widget.typeTransport,
-                      )
-                    : null,
+                panel: panelCubit.state.modeTransportPanel == null
+                    ? mapModesCubit.state.plan != null
+                        ? BottomSheetItineraries(
+                            trufiMapController: trufiMapController,
+                            typeTransport: widget.typeTransport,
+                          )
+                        : null
+                    : panelCubit.state.modeTransportPanel?.panel(context, () {
+                        panelCubit.cleanPanel();
+                      }),
+                onClose: panelCubit.state.modeTransportPanel == null
+                    ? null
+                    : panelCubit.cleanPanel,
+                // panel: mapModesCubit.state.plan != null
+                //     ? BottomSheetItineraries(
+                //         trufiMapController: trufiMapController,
+                //         typeTransport: widget.typeTransport,
+                //       )
+                //     : null,
               ),
             ),
           ],

@@ -3,12 +3,14 @@ import 'dart:async';
 import 'package:gql/language.dart';
 import 'package:graphql/client.dart';
 import 'package:stadtnavi_core/base/pages/home/services/global_alerts/models/global_alert_entity.dart';
-import 'package:trufi_core/base/utils/graphql_client/graphql_client.dart';
+import 'package:stadtnavi_core/configuration/graphql_client.dart';
 
 class OtpGlobalAlertsRepository {
   final GraphQLClient client;
 
-  OtpGlobalAlertsRepository(String endpoint) : client = getClient(endpoint);
+  OtpGlobalAlertsRepository(String endpoint)
+      : client = getClient(endpoint,
+            partialDataPolicy: PartialDataCachePolicy.reject);
 
   Future<List<GlobalAlertEntity>> fetchAlerts({
     required List<String> feedIds,
@@ -33,6 +35,8 @@ class OtpGlobalAlertsRepository {
       variables: <String, dynamic>{
         'feedids': feedIds,
       },
+      fetchPolicy: FetchPolicy.noCache,
+      cacheRereadPolicy: CacheRereadPolicy.ignoreAll,
     );
     final planAdvancedData = await client.query(planAdvancedQuery);
     if (planAdvancedData.hasException && planAdvancedData.data == null) {

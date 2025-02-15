@@ -40,7 +40,7 @@ class GlobalAlertsState extends Equatable {
   }
 
   List<GlobalAlertEntity> get getFilteredAlerts =>
-      alerts.where((e) => !removedAlertIds.contains(e.id)).toList();
+      alerts.where((e) => !removedAlertIds.contains(e.getServiceAlertId)).toList();
 
   Map<String, dynamic> toJson() {
     return {

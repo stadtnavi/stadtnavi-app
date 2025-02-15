@@ -28,6 +28,8 @@ class _BannerAlertsState extends State<BannerAlerts> {
     final getFilteredAlerts = globalAlertsState.getFilteredAlerts;
     return getFilteredAlerts.isNotEmpty
         ? Container(
+            height:
+                isExpandable ? MediaQuery.of(context).size.height * 0.4 : 95,
             color: ThemeCubit.isDarkMode(theme)
                 ? theme.appBarTheme.backgroundColor
                 : theme.colorScheme.primary,
@@ -38,10 +40,7 @@ class _BannerAlertsState extends State<BannerAlerts> {
               ),
               child: Column(
                 children: [
-                  SizedBox(
-                    height: isExpandable
-                        ? MediaQuery.of(context).size.height * 0.3
-                        : 72,
+                  Expanded(
                     child: PageView.builder(
                       controller: _pageController,
                       itemCount: getFilteredAlerts.length,
@@ -52,113 +51,111 @@ class _BannerAlertsState extends State<BannerAlerts> {
                       },
                       itemBuilder: (context, index) {
                         final alert = getFilteredAlerts[index];
-                        return Expanded(
-                          child: Stack(
-                            children: [
-                              Positioned(
-                                left: 0,
-                                right: 0,
-                                top: 0,
-                                bottom: 0,
-                                child: SingleChildScrollView(
-                                  physics: const ClampingScrollPhysics(),
-                                  child: Container(
-                                    padding: const EdgeInsets.only(
-                                      left: 50,
-                                      top: 12,
-                                      right: 50,
-                                      bottom: 0,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          alert.alertHeaderText ?? "",
+                        return Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            Positioned(
+                              left: 0,
+                              right: 0,
+                              top: 0,
+                              bottom: 0,
+                              child: SingleChildScrollView(
+                                physics: const ClampingScrollPhysics(),
+                                child: Container(
+                                  padding: const EdgeInsets.only(
+                                    left: 50,
+                                    top: 12,
+                                    right: 50,
+                                    bottom: 0,
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        alert.alertHeaderText ?? "",
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 13,
+                                          height: 1,
+                                          overflow: isExpandable
+                                              ? null
+                                              : TextOverflow.ellipsis,
+                                        ),
+                                        maxLines: isExpandable ? null : 2,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      RichText(
+                                        maxLines: isExpandable ? null : 2,
+                                        text: TextSpan(
+                                          text: alert.alertDescriptionText,
                                           style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 13,
                                             height: 1,
+                                            fontSize: 13,
                                             overflow: isExpandable
                                                 ? null
                                                 : TextOverflow.ellipsis,
+                                            color: Colors.black,
                                           ),
-                                          maxLines: isExpandable ? null : 2,
-                                        ),
-                                        const SizedBox(height: 8),
-                                        RichText(
-                                          maxLines: isExpandable ? null : 2,
-                                          text: TextSpan(
-                                            text: alert.alertDescriptionText,
-                                            style: TextStyle(
-                                              height: 1,
-                                              fontSize: 13,
-                                              overflow: isExpandable
-                                                  ? null
-                                                  : TextOverflow.ellipsis,
-                                              color: Colors.black,
-                                            ),
-                                            children: [
-                                              if (alert.alertUrl != null)
-                                                TextSpan(
-                                                  text: localization
-                                                      .commonMoreInfo,
-                                                  style: const TextStyle(
-                                                    fontSize: 13,
-                                                    fontWeight: FontWeight.bold,
-                                                    height: 1,
-                                                    decoration: TextDecoration
-                                                        .underline,
-                                                  ),
-                                                  recognizer:
-                                                      TapGestureRecognizer()
-                                                        ..onTap = () async {
-                                                          Uri uri = Uri.parse(
-                                                              alert.alertUrl ??
-                                                                  '');
-                                                          if (await canLaunchUrl(
-                                                              uri)) {
-                                                            await launchUrl(
-                                                                uri);
-                                                          }
-                                                        },
+                                          children: [
+                                            if (alert.alertUrl != null)
+                                              TextSpan(
+                                                text:
+                                                    localization.commonMoreInfo,
+                                                style: const TextStyle(
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.bold,
+                                                  height: 1,
+                                                  decoration:
+                                                      TextDecoration.underline,
                                                 ),
-                                            ],
-                                          ),
+                                                recognizer:
+                                                    TapGestureRecognizer()
+                                                      ..onTap = () async {
+                                                        Uri uri = Uri.parse(
+                                                            alert.alertUrl ??
+                                                                '');
+                                                        if (await canLaunchUrl(
+                                                            uri)) {
+                                                          await launchUrl(uri);
+                                                        }
+                                                      },
+                                              ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                              Positioned(
-                                left: 12,
-                                top: 12,
-                                child: SizedBox(
-                                  height: 24,
-                                  width: 24,
-                                  child: FittedBox(
-                                    child: cautionSvg(
-                                        color: Colors.white,
-                                        backColor: const Color(0xFFDC0451)),
-                                  ),
+                            ),
+                            Positioned(
+                              left: 12,
+                              top: 12,
+                              child: SizedBox(
+                                height: 24,
+                                width: 24,
+                                child: FittedBox(
+                                  child: cautionSvg(
+                                      color: Colors.white,
+                                      backColor: const Color(0xFFDC0451)),
                                 ),
                               ),
-                              Positioned(
-                                right: 0,
-                                top: 0,
-                                child: IconButton(
-                                  icon: const Icon(
-                                    Icons.close,
-                                    color: Color(0xFFDC0451),
-                                  ),
-                                  onPressed: () {
-                                    globalAlertsCubit.deleteAlert(alert);
-                                  },
+                            ),
+                            Positioned(
+                              right: 0,
+                              top: 0,
+                              child: IconButton(
+                                icon: const Icon(
+                                  Icons.close,
+                                  color: Color(0xFFDC0451),
                                 ),
+                                onPressed: () {
+                                  globalAlertsCubit.deleteAlert(alert);
+                                },
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         );
                       },
                     ),
@@ -192,10 +189,9 @@ class _BannerAlertsState extends State<BannerAlerts> {
                                 constraints: const BoxConstraints(),
                                 icon: Icon(
                                   Icons.arrow_back_ios,
-                                  color:
-                                      _currentIndex != 0
-                                          ? const Color(0xFFDC0451)
-                                          : Colors.grey,
+                                  color: _currentIndex != 0
+                                      ? const Color(0xFFDC0451)
+                                      : Colors.grey,
                                   size: 18,
                                 ),
                               ),
@@ -237,7 +233,7 @@ class _BannerAlertsState extends State<BannerAlerts> {
                               ),
                               IconButton(
                                 onPressed: _currentIndex <
-                                        getFilteredAlerts.length-1
+                                        getFilteredAlerts.length - 1
                                     ? () {
                                         _pageController.nextPage(
                                           duration:
@@ -248,11 +244,10 @@ class _BannerAlertsState extends State<BannerAlerts> {
                                     : null,
                                 icon: Icon(
                                   Icons.arrow_forward_ios,
-                                  color:
-                                   _currentIndex <
-                                        getFilteredAlerts.length-1
-                                          ? const Color(0xFFDC0451)
-                                          : Colors.grey,
+                                  color: _currentIndex <
+                                          getFilteredAlerts.length - 1
+                                      ? const Color(0xFFDC0451)
+                                      : Colors.grey,
                                   size: 20,
                                 ),
                                 padding: EdgeInsets.zero,

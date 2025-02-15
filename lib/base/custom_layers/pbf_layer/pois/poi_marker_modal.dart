@@ -26,7 +26,7 @@ class PoiMarkerModal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final languageCode = Localizations.localeOf(context).languageCode;
+    final isLanguageEn = Localizations.localeOf(context).languageCode == 'en';
     final localizationST = StadtnaviBaseLocalization.of(context);
     final isEnglishCode = languageCode == 'en';
     final subCategoryData = HBLayerData.subCategoriesList[element.category3];

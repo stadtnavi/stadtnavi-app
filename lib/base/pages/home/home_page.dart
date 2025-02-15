@@ -130,7 +130,12 @@ class _HomePageState extends State<HomePage>
       ),
       body: Column(
         children: [
-          const BannerAlerts(),
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Flexible(child: const BannerAlerts()),
+            ],
+          ),
           HomeAppBar(
             onSaveFrom: (TrufiLocation fromPlace) =>
                 mapRouteCubit.setFromPlace(fromPlace).then(
