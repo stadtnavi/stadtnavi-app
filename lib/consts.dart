@@ -15,7 +15,7 @@ class ApiConfig {
     var currentDate = DateTime.now();
     var switchDate = DateTime(2023, 12, 28);
     if (currentDate.isAfter(switchDate)) {
-      baseDomain = "api.stadtnavi.de";
+      baseDomain = "api.dev.stadtnavi.eu";
     }
   }
 

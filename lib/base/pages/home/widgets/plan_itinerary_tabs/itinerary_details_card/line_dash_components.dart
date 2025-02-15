@@ -517,41 +517,41 @@ class WalkDash extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (leg.steps != null && leg.steps!.isNotEmpty)
-                ExpansionTile(
-                  visualDensity: const VisualDensity(vertical: -4),
-                  title: Text(
-                    '${localization.commonWalk} ${leg.durationLeg(localization)} (${leg.distanceString(localization)})',
-                  ),
-                  tilePadding: const EdgeInsets.symmetric(
-                    horizontal: 0,
-                    vertical: 0,
-                  ),
-                  textColor: theme.colorScheme.onSurface,
-                  collapsedTextColor: theme.colorScheme.onSurface,
-                  iconColor: theme.primaryColor,
-                  collapsedIconColor: theme.primaryColor,
-                  childrenPadding: const EdgeInsets.symmetric(horizontal: 10),
-                  children: leg.steps!
-                      .map((e) => InkWell(
-                            onTap: () {
-                              if (e.lat != null && e.lon != null) {
-                                moveInMap(LatLng(
-                                  e.lat!,
-                                  e.lon!,
-                                ));
-                              }
-                            },
-                            child: StepNavigationDetails(
-                              step: e,
-                            ),
-                          ))
-                      .toList(),
-                )
-              else
-                Text(
-                  '${localization.commonWalk} ${leg.durationLeg(localization)} (${leg.distanceString(localization)})',
-                ),
+              // if (leg.steps != null && leg.steps!.isNotEmpty)
+              //   ExpansionTile(
+              //     visualDensity: const VisualDensity(vertical: -4),
+              //     title: Text(
+              //       '${localization.commonWalk} ${leg.durationLeg(localization)} (${leg.distanceString(localization)})',
+              //     ),
+              //     tilePadding: const EdgeInsets.symmetric(
+              //       horizontal: 0,
+              //       vertical: 0,
+              //     ),
+              //     textColor: theme.colorScheme.onSurface,
+              //     collapsedTextColor: theme.colorScheme.onSurface,
+              //     iconColor: theme.primaryColor,
+              //     collapsedIconColor: theme.primaryColor,
+              //     childrenPadding: const EdgeInsets.symmetric(horizontal: 10),
+              //     children: leg.steps!
+              //         .map((e) => InkWell(
+              //               onTap: () {
+              //                 if (e.lat != null && e.lon != null) {
+              //                   moveInMap(LatLng(
+              //                     e.lat!,
+              //                     e.lon!,
+              //                   ));
+              //                 }
+              //               },
+              //               child: StepNavigationDetails(
+              //                 step: e,
+              //               ),
+              //             ))
+              //         .toList(),
+              //   )
+              // else
+              Text(
+                '${localization.commonWalk} ${leg.durationLeg(localization)} (${leg.distanceString(localization)})',
+              ),
             ],
           ),
         ),
