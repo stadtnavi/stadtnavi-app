@@ -7,14 +7,32 @@ part 'panel_state.dart';
 class PanelCubit extends Cubit<PanelState> {
   PanelCubit() : super(const PanelState());
   void setPanel(CustomMarkerPanel panel) {
-    emit(const PanelState());
+    // emit(const PanelState());
     Future.delayed(
       const Duration(milliseconds: 0),
-      () => emit(PanelState(panel: panel)),
+      () => emit(
+        state.isTransportPanel
+            ? state.copyWith(modeTransportPanel: panel)
+            : state.copyWith(panel: panel),
+      ),
     );
   }
 
   void cleanPanel() {
-    emit(const PanelState());
+    emit(
+      state.isTransportPanel
+          ? PanelState(
+              panel: state.panel,
+              isTransportPanel: state.isTransportPanel,
+            )
+          : PanelState(
+              modeTransportPanel: state.modeTransportPanel,
+              isTransportPanel: state.isTransportPanel,
+            ),
+    );
+  }
+
+  void changeTransportPanel(bool isTransportPanel) {
+    emit(state.copyWith(isTransportPanel: isTransportPanel));
   }
 }

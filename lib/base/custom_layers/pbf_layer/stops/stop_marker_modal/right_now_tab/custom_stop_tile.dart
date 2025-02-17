@@ -6,7 +6,7 @@ import 'package:trufi_core/base/models/enums/transport_mode.dart';
 import 'package:trufi_core/base/widgets/screen/screen_helpers.dart';
 
 class CustomStopTile extends StatelessWidget {
-  final Stoptime stopTime;
+  final StoptimeOtp stopTime;
   final bool isLastStop;
 
   const CustomStopTile({
@@ -51,8 +51,15 @@ class CustomStopTile extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => BaseTrufiPage(
-                          child: RoutesStopScreen(stopTime: stopTime))),
+                    builder: (context) => BaseTrufiPage(
+                      child: RoutesStopScreen(
+                        routeShortName: stopTime.trip?.route?.shortName ?? '',
+                        routeGtfsId: stopTime.trip?.route?.gtfsId ?? '',
+                        patternCode: stopTime.trip?.pattern?.code ?? '',
+                        transportMode: stopTime.trip?.route?.mode,
+                      ),
+                    ),
+                  ),
                 );
               },
               leading: Container(

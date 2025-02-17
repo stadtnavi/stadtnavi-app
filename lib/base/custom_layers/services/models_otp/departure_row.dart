@@ -8,7 +8,7 @@ class DepartureRow {
   final double? lat;
   final double? lon;
   final PatternOtp? pattern;
-  final List<Stoptime>? stoptimes;
+  final List<StoptimeOtp>? stoptimes;
 
   const DepartureRow({
     this.id,
@@ -30,8 +30,8 @@ class DepartureRow {
             ? PatternOtp.fromJson(json['pattern'] as Map<String, dynamic>)
             : null,
         stoptimes: json['stoptimes'] != null
-            ? List<Stoptime>.from((json["stoptimes"] as List<dynamic>).map(
-                (x) => Stoptime.fromJson(x as Map<String, dynamic>),
+            ? List<StoptimeOtp>.from((json["stoptimes"] as List<dynamic>).map(
+                (x) => StoptimeOtp.fromJson(x as Map<String, dynamic>),
               ))
             : null,
       );

@@ -18,15 +18,12 @@ class RightNowScreen extends StatefulWidget {
   _RightNowScreenState createState() => _RightNowScreenState();
 }
 
-class _RightNowScreenState extends State<RightNowScreen>
-    with AutomaticKeepAliveClientMixin {
-  List<Stoptime>? stoptimes;
+class _RightNowScreenState extends State<RightNowScreen> {
+  List<StoptimeOtp>? stoptimes;
   int indexNextDay = -1;
   bool loading = true;
   String? fetchError;
 
-  @override
-  bool get wantKeepAlive => true;
   @override
   void initState() {
     super.initState();
@@ -36,7 +33,7 @@ class _RightNowScreenState extends State<RightNowScreen>
   }
 
   Future<void> _fetchStopData() async {
-    if (!mounted) return;
+    if (!mounted && stoptimes != null) return;
     setState(() {
       fetchError = null;
       loading = true;
@@ -67,7 +64,6 @@ class _RightNowScreenState extends State<RightNowScreen>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Column(
       children: [
         if (stoptimes != null)
@@ -76,7 +72,7 @@ class _RightNowScreenState extends State<RightNowScreen>
               child: ListView.builder(
                 itemCount: stoptimes!.length,
                 itemBuilder: (contextBuilde, index) {
-                  final Stoptime stopTime = stoptimes![index];
+                  final StoptimeOtp stopTime = stoptimes![index];
                   return Column(
                     children: [
                       if (indexNextDay == index && index == 0)
@@ -118,7 +114,7 @@ class _TitleDay extends StatelessWidget {
     required this.stoptime,
   }) : super(key: key);
 
-  final Stoptime stoptime;
+  final StoptimeOtp stoptime;
 
   @override
   Widget build(BuildContext context) {

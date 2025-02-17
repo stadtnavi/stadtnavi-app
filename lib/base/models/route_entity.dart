@@ -12,6 +12,7 @@ class RouteEntity extends Equatable {
   final String? url;
   final String? color;
   final String? textColor;
+  final List<Alert>? alerts;
 
   const RouteEntity({
     this.id,
@@ -25,6 +26,7 @@ class RouteEntity extends Equatable {
     this.url,
     this.color,
     this.textColor,
+    this.alerts,
   });
 
   factory RouteEntity.fromJson(Map<String, dynamic> json) => RouteEntity(
@@ -41,6 +43,11 @@ class RouteEntity extends Equatable {
         url: json['url'] as String?,
         color: json['color'] as String?,
         textColor: json['textColor'] as String?,
+        alerts: json['alerts'] != null
+            ? List<Alert>.from((json["alerts"] as List<dynamic>).map(
+                (x) => Alert.fromJson(x as Map<String, dynamic>),
+              ))
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -55,6 +62,9 @@ class RouteEntity extends Equatable {
         'url': url,
         'color': color,
         'textColor': textColor,
+        'alerts': alerts != null
+            ? List<dynamic>.from(alerts!.map((x) => x.toJson()))
+            : null,
       };
 
   String get headsignFromRouteLongName {
@@ -90,5 +100,6 @@ class RouteEntity extends Equatable {
         url,
         color,
         textColor,
+        alerts,
       ];
 }

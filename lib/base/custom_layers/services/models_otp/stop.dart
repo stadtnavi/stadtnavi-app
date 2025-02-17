@@ -15,7 +15,7 @@ import 'stoptimes_in_pattern.dart';
 
 class Stop {
   final String? id;
-  final List<Stoptime>? stopTimesForPattern;
+  final List<StoptimeOtp>? stopTimesForPattern;
   final String? gtfsId;
   final String? name;
   final double? lat;
@@ -39,7 +39,7 @@ class Stop {
   final List<StopAtDistance>? transfers;
   final List<StoptimesInPattern>? stoptimesForServiceDate;
   final List<StoptimesInPattern>? stoptimesForPatterns;
-  final List<Stoptime>? stoptimesWithoutPatterns;
+  final List<StoptimeOtp>? stoptimesWithoutPatterns;
   final List<Alert>? alerts;
 
   const Stop({
@@ -75,9 +75,9 @@ class Stop {
   factory Stop.fromJson(Map<String, dynamic> json) => Stop(
         id: json['id'].toString(),
         stopTimesForPattern: json['stopTimesForPattern'] != null
-            ? List<Stoptime>.from(
+            ? List<StoptimeOtp>.from(
                 (json["stopTimesForPattern"] as List<dynamic>).map(
-                (x) => Stoptime.fromJson(x as Map<String, dynamic>),
+                (x) => StoptimeOtp.fromJson(x as Map<String, dynamic>),
               ))
             : null,
         gtfsId: json['gtfsId'].toString(),
@@ -136,9 +136,9 @@ class Stop {
               ))
             : null,
         stoptimesWithoutPatterns: json['stoptimesWithoutPatterns'] != null
-            ? List<Stoptime>.from(
+            ? List<StoptimeOtp>.from(
                 (json["stoptimesWithoutPatterns"] as List<dynamic>).map(
-                (x) => Stoptime.fromJson(x as Map<String, dynamic>),
+                (x) => StoptimeOtp.fromJson(x as Map<String, dynamic>),
               ))
             : null,
         alerts: json['alerts'] != null
@@ -182,7 +182,7 @@ class Stop {
   //       'alerts': List<dynamic>.from(alerts.map((x) => x.toJson())),
   //     };
 
-  List<Stoptime> get stoptimesWithoutPatternsCurrent {
+  List<StoptimeOtp> get stoptimesWithoutPatternsCurrent {
     final now = DateTime.now();
     return stoptimesWithoutPatterns
             ?.where((element) => element.dateTime.isAfter(now))

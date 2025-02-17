@@ -198,6 +198,7 @@ class Leg {
       duration: Duration(seconds: (duration ?? 0).toInt()),
       routeLongName: route?.longName ?? '',
       agency: agency?.toAgencyEntity(),
+      realtimeState:realtimeState,
       toPlace: to?.toPlaceEntity(),
       fromPlace: from?.toPlaceEntity(),
       steps: steps?.map((x) => x.toStepEntity()).toList(),

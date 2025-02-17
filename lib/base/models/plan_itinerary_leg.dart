@@ -11,6 +11,7 @@ class PlanItineraryLeg extends Equatable {
     required this.distance,
     required this.duration,
     this.agency,
+    this.realtimeState,
     this.toPlace,
     this.fromPlace,
     required this.startTime,
@@ -38,6 +39,7 @@ class PlanItineraryLeg extends Equatable {
   static const _route = "route";
   static const _routeLongName = "routeLongName";
   static const _agency = "agency";
+  static const _realtimeState = "realtimeState";
   static const _toPlace = "to";
   static const _fromPlace = "from";
   static const _startTime = "startTime";
@@ -60,6 +62,7 @@ class PlanItineraryLeg extends Equatable {
   final double distance;
   final Duration duration;
   final AgencyEntity? agency;
+  final RealtimeState? realtimeState;
   final PlaceEntity? toPlace;
   final PlaceEntity? fromPlace;
   final DateTime startTime;
@@ -98,6 +101,7 @@ class PlanItineraryLeg extends Equatable {
       agency: json[_agency] != null
           ? AgencyEntity.fromMap(json[_agency] as Map<String, dynamic>)
           : null,
+      realtimeState: getRealtimeStateByString(json[_realtimeState].toString()),
       toPlace: json[_toPlace] != null
           ? PlaceEntity.fromMap(json[_toPlace] as Map<String, dynamic>)
           : null,
@@ -148,6 +152,7 @@ class PlanItineraryLeg extends Equatable {
       _distance: distance,
       _duration: duration.inSeconds,
       _agency: agency?.toMap(),
+      _realtimeState: realtimeState?.name,
       _toPlace: toPlace?.toMap(),
       _fromPlace: fromPlace?.toMap(),
       _startTime: startTime.millisecondsSinceEpoch,
@@ -176,6 +181,7 @@ class PlanItineraryLeg extends Equatable {
     String? routeLongName,
     double? distance,
     Duration? duration,
+    RealtimeState? realtimeState,
     PlaceEntity? toPlace,
     PlaceEntity? fromPlace,
     DateTime? startTime,
@@ -199,6 +205,7 @@ class PlanItineraryLeg extends Equatable {
       routeLongName: routeLongName ?? this.routeLongName,
       distance: distance ?? this.distance,
       duration: duration ?? this.duration,
+      realtimeState: realtimeState ?? this.realtimeState,
       toPlace: toPlace ?? this.toPlace,
       fromPlace: fromPlace ?? this.fromPlace,
       startTime: startTime ?? this.startTime,
@@ -295,5 +302,6 @@ class PlanItineraryLeg extends Equatable {
         steps,
         intermediatePlaces,
         // trip,
+        realtimeState,
       ];
 }

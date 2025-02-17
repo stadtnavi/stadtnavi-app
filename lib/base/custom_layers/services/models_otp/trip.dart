@@ -24,10 +24,10 @@ class Trip {
   final PatternOtp? pattern;
   final List<Stop>? stops;
   final String? semanticHash;
-  final List<Stoptime>? stoptimes;
-  final Stoptime? departureStoptime;
-  final Stoptime? arrivalStoptime;
-  final List<Stoptime>? stoptimesForDate;
+  final List<StoptimeOtp>? stoptimes;
+  final StoptimeOtp? departureStoptime;
+  final StoptimeOtp? arrivalStoptime;
+  final List<StoptimeOtp>? stoptimesForDate;
   final List<double>? geometry;
   final Geometry? tripGeometry;
   final List<Alert>? alerts;
@@ -87,21 +87,21 @@ class Trip {
             : null,
         semanticHash: json['semanticHash'] as String?,
         stoptimes: json['stoptimes'] != null
-            ? List<Stoptime>.from((json["stoptimes"] as List<dynamic>).map(
-                (x) => Stoptime.fromJson(x as Map<String, dynamic>),
+            ? List<StoptimeOtp>.from((json["stoptimes"] as List<dynamic>).map(
+                (x) => StoptimeOtp.fromJson(x as Map<String, dynamic>),
               ))
             : null,
         departureStoptime: json['departureStoptime'] != null
-            ? Stoptime.fromJson(
+            ? StoptimeOtp.fromJson(
                 json['departureStoptime'] as Map<String, dynamic>)
             : null,
         arrivalStoptime: json['arrivalStoptime'] != null
-            ? Stoptime.fromJson(json['arrivalStoptime'] as Map<String, dynamic>)
+            ? StoptimeOtp.fromJson(json['arrivalStoptime'] as Map<String, dynamic>)
             : null,
         stoptimesForDate: json['stoptimesForDate'] != null
-            ? List<Stoptime>.from(
+            ? List<StoptimeOtp>.from(
                 (json["stoptimesForDate"] as List<dynamic>).map(
-                (x) => Stoptime.fromJson(x as Map<String, dynamic>),
+                (x) => StoptimeOtp.fromJson(x as Map<String, dynamic>),
               ))
             : null,
         geometry: json['geometry'] != null

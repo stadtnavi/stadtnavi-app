@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stadtnavi_core/base/models/othermodel/enums/alert_severity_level_type.dart';
 
 class IconTransport extends StatelessWidget {
   final Color color;
@@ -7,6 +8,7 @@ class IconTransport extends StatelessWidget {
   final String text;
   final Widget icon;
   final Widget? secondaryIcon;
+  final AlertSeverityLevelType? alertSeverityLevel;
 
   const IconTransport({
     Key? key,
@@ -16,6 +18,7 @@ class IconTransport extends StatelessWidget {
     required this.text,
     required this.icon,
     this.secondaryIcon,
+    this.alertSeverityLevel,
   }) : super(key: key);
 
   @override
@@ -33,7 +36,18 @@ class IconTransport extends StatelessWidget {
             height: 30,
             width: 22,
             child: Center(
-              child: icon,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  icon,
+                  if (alertSeverityLevel != null)
+                    Positioned(
+                      bottom: -8,
+                      left: -5,
+                      child: alertSeverityLevel!.getWithBigCautionIcon(size: 17),
+                    ),
+                ],
+              ),
             ),
           ),
           if (secondaryIcon != null)

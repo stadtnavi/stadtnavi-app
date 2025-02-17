@@ -1,5 +1,6 @@
-
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter/material.dart';
+import 'package:trufi_core/base/utils/util_icons/custom_icons.dart';
 
 import 'stops_enum.dart';
 
@@ -60,6 +61,38 @@ const String _subway = """
     <path fill="#fff" d="M4.395 3.7v3.163c0 1.056.003 1.866.007 2.43.002.282.005.502.008.662.003.16.007.257.01.294a4.549 4.549 0 0 0 .11.605 3.708 3.708 0 0 0 .187.544 3.143 3.143 0 0 0 .34.587 2.816 2.816 0 0 0 .428.455 2.549 2.549 0 0 0 .576.367 3.024 3.024 0 0 0 .463.173 4.28 4.28 0 0 0 .541.123 3.587 3.587 0 0 0 .347.042c.063.004.134.006.22.008l.312.003c.154 0 .284-.002.399-.006.115-.004.215-.01.309-.02.093-.009.18-.022.27-.039a4.572 4.572 0 0 0 .528-.137 3.35 3.35 0 0 0 .458-.194 2.975 2.975 0 0 0 .588-.403 2.763 2.763 0 0 0 .586-.736 3.094 3.094 0 0 0 .206-.448 3.547 3.547 0 0 0 .144-.5 4.19 4.19 0 0 0 .092-.868c.003-.17.006-.4.008-.686.005-.573.007-1.367.007-2.343V3.7H9.572L9.565 6.89l-.007 3.193-.052.246c-.019.088-.04.17-.063.248a2.284 2.284 0 0 1-.123.32 1.647 1.647 0 0 1-.16.26 1.266 1.266 0 0 1-.277.262 1.248 1.248 0 0 1-.258.136 1.598 1.598 0 0 1-.31.086 1.623 1.623 0 0 1-.138.008 8.172 8.172 0 0 1-.403.002 2.394 2.394 0 0 1-.136-.006.988.988 0 0 1-.184-.032 1.662 1.662 0 0 1-.306-.131 1.326 1.326 0 0 1-.395-.349 1.439 1.439 0 0 1-.172-.292 1.942 1.942 0 0 1-.126-.357 2.9 2.9 0 0 1-.07-.366 2.532 2.532 0 0 1-.01-.126 12.47 12.47 0 0 1-.014-.479 885.156 885.156 0 0 1-.013-2.68L6.34 3.7h-.97z" stroke-width=".012" />
 </svg>
 """;
+String _cautionNoExcl({String color = '#DC0451'}) => """
+<svg id="icon-icon_caution-no-excl" viewBox="0 0 12 12">
+    <g fill="none" fill-rule="evenodd">
+        <g fill='$color' stroke="#FFF">
+            <path d="M6 1c.305 0 .61.08.88.24.252.147.474.364.637.65h0l3.75 6.62c.332.589.29 1.251-.001 1.766-.152.268-.371.495-.64.653-.253.15-.55.238-.876.238h0H2.25c-.327 0-.624-.088-.877-.237-.269-.158-.488-.386-.64-.654C.443 9.761.401 9.1.734 8.51h0l3.75-6.62c.162-.286.384-.503.635-.65C5.39 1.08 5.695 1 6 1z" transform="translate(-203 -416) translate(0 -52) translate(0 77) translate(203 391)"/>
+        </g>
+    </g>
+</svg>z
+""";
+
+Widget cautionNoExclIcon({Color? color = const Color(0xFFDC0451)}) {
+  return SvgPicture.string(_cautionNoExcl(
+    color: decodeFillColor(color),
+  ));
+}
+
+String _cautionNoExclNoStroke({String color = '#DC0451'}) => """
+<svg id="icon-icon_caution-no-excl-no-stroke" viewBox="0 0 12 12">
+  <g fill="none" fill-rule="evenodd">
+    <g fill='$color' stroke="&#xA4;DC0451">
+      <path d="M6 1c.305 0 .61.08.88.24.252.147.474.364.637.65h0l3.75 6.62c.332.589.29 1.251-.001 1.766-.152.268-.371.495-.64.653-.253.15-.55.238-.876.238h0H2.25c-.327 0-.624-.088-.877-.237-.269-.158-.488-.386-.64-.654C.443 9.761.401 9.1.734 8.51h0l3.75-6.62c.162-.286.384-.503.635-.65C5.39 1.08 5.695 1 6 1z" transform="translate(-203 -416) translate(0 -52) translate(0 77) translate(203 391)"/>
+    </g>
+  </g>
+</svg>
+""";
+
+Widget cautionNoExclNoStrokeIcon({Color? color = const Color(0xFFDC0451)}) {
+  return SvgPicture.string(_cautionNoExclNoStroke(
+    color: decodeFillColor(color),
+  ));
+}
+
 const String _funicular=""""
 <svg width="16" height="22" viewBox="0 0 16 22" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_7_4)">

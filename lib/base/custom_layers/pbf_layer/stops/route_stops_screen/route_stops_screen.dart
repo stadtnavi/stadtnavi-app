@@ -4,9 +4,10 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
 import 'package:stadtnavi_core/base/custom_layers/pbf_layer/stops/route_stops_screen/bottom_stops_detail.dart';
+import 'package:stadtnavi_core/base/custom_layers/pbf_layer/stops/route_stops_screen/route_disruptions_alerts_screen.dart';
+import 'package:stadtnavi_core/base/custom_layers/pbf_layer/stops/stops_icon.dart';
 import 'package:stadtnavi_core/base/custom_layers/services/layers_repository.dart';
 import 'package:stadtnavi_core/base/custom_layers/services/models_otp/pattern.dart';
-import 'package:stadtnavi_core/base/custom_layers/services/models_otp/stoptime.dart';
 import 'package:stadtnavi_core/base/pages/home/widgets/maps/buttons/crop_button.dart';
 import 'package:stadtnavi_core/base/pages/home/widgets/maps/stadtnavi_map.dart';
 import 'package:stadtnavi_core/base/pages/home/widgets/maps/trufi_map_cubit/trufi_map_cubit.dart';
@@ -18,10 +19,16 @@ import 'package:trufi_core/base/translations/trufi_base_localizations.dart';
 import 'package:trufi_core/base/widgets/custom_scrollable_container.dart';
 
 class RoutesStopScreen extends StatefulWidget {
-  final Stoptime stopTime;
+  final String routeShortName;
+  final String routeGtfsId;
+  final String patternCode;
+  final TransportMode? transportMode;
   const RoutesStopScreen({
     Key? key,
-    required this.stopTime,
+    required this.routeShortName,
+    required this.routeGtfsId,
+    required this.patternCode,
+    required this.transportMode,
   }) : super(key: key);
 
   @override
@@ -64,14 +71,14 @@ class _RoutesStopScreenState extends State<RoutesStopScreen>
   Widget build(BuildContext context) {
     final localization = TrufiBaseLocalization.of(context);
     final mapConfiguratiom = context.read<MapConfigurationCubit>().state;
+    final languageCode = Localizations.localeOf(context).languageCode;
     return Scaffold(
       appBar: AppBar(
         title: Row(
           children: [
-            Text(getTransportMode(
-                    mode: widget.stopTime.trip?.route?.mode?.name ?? '')
+            Text(getTransportMode(mode: widget.transportMode?.name ?? '')
                 .getTranslate(localization)),
-            Text(' - ${widget.stopTime.trip?.route?.shortName ?? ''}'),
+            Text(' - ${widget.routeShortName}'),
           ],
         ),
       ),
@@ -128,16 +135,51 @@ class _RoutesStopScreenState extends State<RoutesStopScreen>
                   ),
                 ],
               ),
-              panel: BottomStopsDetails(
-                routeOtp: patternOtp!.route!,
-                stops: patternOtp?.stops ?? [],
-                moveTo: (point) {
-                  _trufiMapController.move(
-                    center: point,
-                    zoom: 16,
-                    tickerProvider: this,
-                  );
-                },
+              panel: DefaultTabController(
+                length: 2,
+                child: Column(
+                  children: [
+                    TabBar(
+                      labelColor: Colors.black,
+                      tabs: [
+                        Tab(text: languageCode == 'en' ? "Stops" : "Jetzt"),
+                        Tab(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              cautionNoExclNoStrokeIcon(),
+                              const SizedBox(width: 4),
+                              Text(languageCode == 'en'
+                                  ? "Disruptions"
+                                  : "Störungen")
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Expanded(
+                      child: TabBarView(
+                        children: [
+                          BottomStopsDetails(
+                            routeOtp: patternOtp!.route!,
+                            stops: patternOtp?.stops ?? [],
+                            moveTo: (point) {
+                              _trufiMapController.move(
+                                center: point,
+                                zoom: 16,
+                                tickerProvider: this,
+                              );
+                            },
+                          ),
+                          RouteDisruptionAlertsScreen(
+                            routeId: widget.routeGtfsId,
+                            patternId: widget.patternCode,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ] else
@@ -156,8 +198,7 @@ class _RoutesStopScreenState extends State<RoutesStopScreen>
       fetchError = null;
       loading = true;
     });
-    await LayersRepository.fetchStopsRoute(
-            widget.stopTime.trip?.pattern?.code ?? "")
+    await LayersRepository.fetchStopsRoute(widget.patternCode)
         .then((value) async {
       if (mounted) {
         setState(() {

@@ -5,7 +5,7 @@ import 'enums/leg/realtime_state.dart';
 import 'stop.dart';
 import 'trip.dart';
 
-class Stoptime {
+class StoptimeOtp {
   final Stop? stop;
   final int? scheduledArrival;
   final int? realtimeArrival;
@@ -22,7 +22,7 @@ class Stoptime {
   final Trip? trip;
   final String? headsign;
 
-  const Stoptime({
+  const StoptimeOtp({
     this.stop,
     this.scheduledArrival,
     this.realtimeArrival,
@@ -40,7 +40,7 @@ class Stoptime {
     this.headsign,
   });
 
-  factory Stoptime.fromJson(Map<String, dynamic> json) => Stoptime(
+  factory StoptimeOtp.fromJson(Map<String, dynamic> json) => StoptimeOtp(
         stop: json['stop'] != null
             ? Stop.fromJson(json['stop'] as Map<String, dynamic>)
             : null,

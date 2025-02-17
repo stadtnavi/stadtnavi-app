@@ -219,6 +219,7 @@ class Stop {
       zoneId: zoneId,
       platformCode: platformCode,
       vehicleMode: getTransportMode(mode: vehicleMode?.name ?? ''),
+      alerts: alerts
     );
   }
 }
